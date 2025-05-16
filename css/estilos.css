@@ -1,0 +1,100 @@
+/* Paleta de colores */
+:root {
+  --primario: #2c3e50;
+  --secundario: #18bc9c;
+  --fondo: #ecf0f1;
+  --texto: #2c3e50;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
+  line-height: 1.6;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primario);
+  padding: 1rem;
+}
+.logo { width: 120px; }
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.hero {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(to right, var(--secundario), var(--primario));
+  color: white;
+}
+.productos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+.card {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  width: 300px;
+  text-align: center;
+}
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+.card button {
+  background-color: var(--secundario);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.formulario {
+  max-width: 400px;
+  margin: 2rem auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 5px;
+}
+.formulario h2 { margin-bottom: 1rem; }
+.formulario label { display: block; margin-top: 1rem; }
+.formulario input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+.formulario button {
+  margin-top: 1rem;
+  background-color: var(--secundario);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--primario);
+  color: white;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
