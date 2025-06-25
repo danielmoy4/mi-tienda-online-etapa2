@@ -1,162 +1,128 @@
-const productos = [
-  {
-    titulo: "Camiseta Liverpool",
-    descripcion: "Camiseta titular 2024",
-    precio: 85000,
-    imagen: "img/kit/Lucho.jpeg"
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedor = document.getElementById("productos");
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+  if (!usuarioActivo) {
+    contenedor.innerHTML = "<p>Inicia sesión para ver los productos.</p>";
+    return;
   }
-];
 
-function renderCards() {
-  const contenedor = document.getElementById("cards-container");
-  productos.forEach(producto => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="${producto.imagen}" alt="${producto.titulo}" />
-      <h3>${producto.titulo}</h3>
-      <p>${producto.descripcion}</p>
-      <p>Precio: $${producto.precio}</p>
-      <div class="cantidad">
-        <button class="restar">-</button>
-        <span>0</span>
-        <button class="sumar">+</button>
-      </div>
-    `;
-    contenedor.appendChild(card);
-  });
+  fetch("data/productos.json")
+    .then((res) => res.json())
+    .then((productos) => {
+      const categorias = ["placas", "monitores", "mouses", "procesadores"];
 
-  document.querySelectorAll(".sumar").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const span = btn.previousElementSibling;
-      span.textContent = parseInt(span.textContent) + 1;
+      categorias.forEach((categoria) => {
+        const productosFiltrados = productos.filter(p => p.categoria === categoria);
+
+        if (productosFiltrados.length > 0) {
+          const tituloCategoria = document.createElement("h3");
+          tituloCategoria.textContent = nombreCategoria(categoria);
+          contenedor.appendChild(tituloCategoria);
+
+          const contenedorCategoria = document.createElement("div");
+          contenedorCategoria.classList.add("categoria-grid");
+
+          productosFiltrados.forEach((producto) => {
+            const card = crearCardProducto(producto);
+            contenedorCategoria.appendChild(card);
+          });
+
+          contenedor.appendChild(contenedorCategoria);
+        }
+      });
+    })
+    .catch((err) => {
+      console.error("Error cargando productos:", err);
+      contenedor.innerHTML = "<p>Error al cargar los productos.</p>";
     });
-  });
+});
 
-  document.querySelectorAll(".restar").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const span = btn.nextElementSibling;
-      const value = parseInt(span.textContent);
-      if (value > 0) span.textContent = value - 1;
-    });
-  });
+function nombreCategoria(categoria) {
+  switch (categoria) {
+    case "placas": return "Placas de video";
+    case "monitores": return "Monitores";
+    case "mouses": return "Mouses";
+    case "procesadores": return "Procesadores";
+    default: return categoria;
+  }
 }
 
-document.addEventListener("DOMContentLoaded", renderCards);
-window.addEventListener("DOMContentLoaded", () => {
-  const productos = [
-    {
-      nombre: "Placa de video RX6600",
-      precio: "$1000",
-      imagen: "img/rx6600.jpg"
-    },
-    {
-      nombre: "Monitor ASUS ROG",
-      precio: "$1500",
-      imagen: "img/MonitorAsusRog.jpg"
-    },
-    {
-      nombre: "Mouse Logitech G502",
-      precio: "$500",
-      imagen: "img/MouseLogitechG502.jpg"
-    },
-    {
-      nombre: "Mouse SteelSeries Aerox 9",
-      precio: "$600",
-      imagen: "img/MouseSteelSeriesAerox9.jpg"
-    },
-    {
-      nombre: "Monitor LG 27\"",
-      precio: "$1300",
-      imagen: "img/MonitorLG27.jpg"
-    },
-    {
-      nombre: "Procesador AMD Ryzen 3",
-      precio: "$800",
-      imagen: "img/ProcesadorAMDRyzen3.jpg"
-    }
-  ];
+function crearCardProducto(producto) {
+  const card = document.createElement("div");
+  card.classList.add("card");
 
-  const container = document.getElementById("productos") || document.getElementById("cards-container");
+  const img = document.createElement("img");
+  img.src = producto.imagen;
+  img.alt = producto.nombre;
 
-  if (container) {
-    container.className = "card-container";
+  const titulo = document.createElement("h4");
+  titulo.textContent = producto.nombre;
 
-    productos.forEach(producto => {
-      const card = document.createElement("div");
-      card.className = "card";
+  const descripcion = document.createElement("p");
+  descripcion.textContent = producto.descripcion;
 
-      card.innerHTML = `
-        <img src="${producto.imagen}" alt="${producto.nombre}">
-        <h3>${producto.nombre}</h3>
-        <p>${producto.precio}</p>
+  const precio = document.createElement("p");
+  precio.textContent = `$${producto.precio}`;
 
-        <div class="cantidad-control">
-          <button class="btn-menos">–</button>
-          <span class="cantidad">0</span>
-          <button class="btn-mas">+</button>
-        </div>
+  const cantidadDiv = document.createElement("div");
+  cantidadDiv.classList.add("cantidad");
 
-        <button class="agregar-carrito">Agregar al carrito</button>
-      `;
+  const btnMenos = document.createElement("button");
+  btnMenos.textContent = "–";
 
-      container.appendChild(card);
+  const inputCantidad = document.createElement("input");
+  inputCantidad.type = "number";
+  inputCantidad.value = 1;
+  inputCantidad.min = 1;
 
-      const btnMas = card.querySelector(".btn-mas");
-      const btnMenos = card.querySelector(".btn-menos");
-      const cantidadSpan = card.querySelector(".cantidad");
-      const btnAgregar = card.querySelector(".agregar-carrito");
+  const btnMas = document.createElement("button");
+  btnMas.textContent = "+";
 
-      let cantidad = 0;
+  btnMenos.addEventListener("click", () => {
+    let valor = parseInt(inputCantidad.value);
+    if (valor > 1) inputCantidad.value = valor - 1;
+  });
 
-      btnMas.addEventListener("click", () => {
-        cantidad++;
-        cantidadSpan.textContent = cantidad;
-      });
+  btnMas.addEventListener("click", () => {
+    let valor = parseInt(inputCantidad.value);
+    inputCantidad.value = valor + 1;
+  });
 
-      btnMenos.addEventListener("click", () => {
-        if (cantidad > 0) {
-          cantidad--;
-          cantidadSpan.textContent = cantidad;
-        }
-      });
+  cantidadDiv.appendChild(btnMenos);
+  cantidadDiv.appendChild(inputCantidad);
+  cantidadDiv.appendChild(btnMas);
 
-      btnAgregar.addEventListener("click", () => {
-        if (cantidad === 0) {
-          alert("Por favor selecciona una cantidad antes de agregar.");
-          return;
-        }
+  const btnAgregar = document.createElement("button");
+  btnAgregar.textContent = "Agregar al carrito";
+  btnAgregar.addEventListener("click", () => {
+    agregarAlCarrito(producto, parseInt(inputCantidad.value));
+  });
 
-        const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
-        if (!usuario) {
-          alert("Debes iniciar sesión para agregar productos al carrito.");
-          return;
-        }
+  card.appendChild(img);
+  card.appendChild(titulo);
+  card.appendChild(descripcion);
+  card.appendChild(precio);
+  card.appendChild(cantidadDiv);
+  card.appendChild(btnAgregar);
 
-        const keyCarrito = `carrito_${usuario.email}`;
-        let carrito = JSON.parse(localStorage.getItem(keyCarrito)) || [];
+  return card;
+}
 
-        const item = {
-          nombre: producto.nombre,
-          precio: producto.precio,
-          imagen: producto.imagen,
-          cantidad
-        };
+function agregarAlCarrito(producto, cantidad) {
+  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+  if (!usuario) return;
 
-        const existente = carrito.find(p => p.nombre === item.nombre);
+  const carritoKey = `carrito_${usuario.email}`;
+  const carrito = JSON.parse(localStorage.getItem(carritoKey)) || [];
 
-        if (existente) {
-          existente.cantidad += cantidad;
-        } else {
-          carrito.push(item);
-        }
-
-        localStorage.setItem(keyCarrito, JSON.stringify(carrito));
-        alert(`Se agregó "${item.nombre}" (${cantidad}) al carrito.`);
-
-        cantidad = 0;
-        cantidadSpan.textContent = cantidad;
-      });
-    });
+  const existente = carrito.find(item => item.nombre === producto.nombre);
+  if (existente) {
+    existente.cantidad += cantidad;
+  } else {
+    carrito.push({ ...producto, cantidad });
   }
-});
+
+  localStorage.setItem(carritoKey, JSON.stringify(carrito));
+  alert(`${producto.nombre} agregado al carrito.`);
+}

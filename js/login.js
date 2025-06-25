@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-document.getElementById("login-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  sessionStorage.setItem("isLoggedIn", true);
-  window.location.href = "tienda.html";
-=======
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formLogin");
 
@@ -25,14 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
       usuarioRegistrado.email === email &&
       usuarioRegistrado.contrasena === contrasena
     ) {
-      // Guardar sesión activa en localStorage
+      // Guardar sesión activa
       localStorage.setItem("usuarioActivo", JSON.stringify(usuarioRegistrado));
+      sessionStorage.setItem("isLoggedIn", true);
 
       alert("Inicio de sesión exitoso. ¡Bienvenido/a " + usuarioRegistrado.nombre + "!");
-      window.location.href = "index.html";
+      window.location.href = "tienda.html";
     } else {
       alert("Credenciales incorrectas. Verifica tu email y contraseña.");
     }
   });
->>>>>>> fe5125a (Entrega etapa 3 finalizada - carrito por usuario y mejoras)
 });

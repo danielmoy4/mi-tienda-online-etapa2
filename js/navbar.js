@@ -1,33 +1,18 @@
-<<<<<<< HEAD
-import { navItems } from './navbar-data.js';
+document.addEventListener("DOMContentLoaded", () => {
+  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
-function renderNavbar() {
-  const navbar = document.getElementById("navbar");
-  let html = '<nav><ul>';
-  navItems.forEach(item => {
-    html += `<li><a href="${item.link}">${item.title}</a></li>`;
-  });
-  html += '<li><button id="logout-btn">Cerrar sesión</button></li>';
-  html += '</ul></nav>';
-  navbar.innerHTML = html;
+  const navbarContainer = document.getElementById("navbar");
 
-  document.getElementById("logout-btn").addEventListener("click", () => {
-    sessionStorage.removeItem("isLoggedIn");
-    window.location.href = "login.html";
-  });
-}
-
-document.addEventListener("DOMContentLoaded", renderNavbar);
-=======
-window.addEventListener("DOMContentLoaded", () => {
   const header = document.createElement("header");
   const nav = document.createElement("nav");
+  nav.classList.add("navbar");
+
+  const logoBox = document.createElement("div");
+  logoBox.classList.add("logo-box");
+  logoBox.innerHTML = `<div class="logo">Mi Tienda</div>`;
+
   const ul = document.createElement("ul");
-
-  header.classList.add("navbar");
-  nav.classList.add("navbar-nav");
-
-  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+  ul.classList.add("nav-links");
 
   const enlacesBase = [
     { name: "Inicio", href: "index.html" },
@@ -55,6 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
   enlacesFinales.forEach(item => {
     const li = document.createElement("li");
     const a = document.createElement("a");
+
     a.href = item.href;
     a.textContent = item.name;
     a.classList.add("nav-link");
@@ -66,18 +52,55 @@ window.addEventListener("DOMContentLoaded", () => {
     if (item.isLogout) {
       a.addEventListener("click", (e) => {
         e.preventDefault();
-        localStorage.removeItem("usuarioActivo"); // ✅ Solo cierra la sesión
+        localStorage.removeItem("usuarioActivo");
+        sessionStorage.removeItem("isLoggedIn");
         window.location.href = "index.html";
       });
     }
-
 
     li.appendChild(a);
     ul.appendChild(li);
   });
 
+  nav.appendChild(logoBox);
   nav.appendChild(ul);
   header.appendChild(nav);
-  document.body.insertBefore(header, document.body.firstChild);
+  navbarContainer.appendChild(header);
 });
->>>>>>> fe5125a (Entrega etapa 3 finalizada - carrito por usuario y mejoras)
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => {
+      const container = document.getElementById("navbar-container");
+      if (container) {
+        container.innerHTML = data;
+
+        // Activar modo oscuro
+        const btnTema = document.getElementById("toggle-theme");
+        if (btnTema) {
+          btnTema.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+          });
+        }
+
+        // Mostrar nombre de usuario si está logueado
+        const user = JSON.parse(localStorage.getItem("usuarioActivo"));
+        if (user) {
+          const nameSpan = document.getElementById("user-name");
+          if (nameSpan) nameSpan.textContent = `Hola, ${user.nombre}`;
+        }
+
+        // Cerrar sesión
+        const logout = document.getElementById("logout-link");
+        if (logout) {
+          logout.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("usuarioActivo");
+            location.href = "login.html";
+          });
+        }
+      }
+    });
+});
+

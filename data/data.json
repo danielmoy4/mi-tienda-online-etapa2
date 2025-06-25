@@ -1,0 +1,42 @@
+[
+  {
+    "id": "rx6600",
+    "categoria": "placas",
+    "nombre": "Placa de video RX6600",
+    "descripcion": "Gráfica potente para gaming 1080p",
+    "precio": 1000,
+    "imagen": "img/rx6600.jpg"
+  },
+  {
+    "id": "monitor-asus",
+    "categoria": "monitores",
+    "nombre": "Monitor ASUS ROG",
+    "descripcion": "Monitor gamer 27'' Full HD 144Hz",
+    "precio": 1500,
+    "imagen": "img/MonitorAsusRog.jpg"
+  },
+  {
+    "id": "monitor-lg",
+    "categoria": "monitores",
+    "nombre": "Monitor LG 27''",
+    "descripcion": "Pantalla IPS 2K para diseño y productividad",
+    "precio": 1300,
+    "imagen": "img/MonitorLG27.jpg"
+  },
+  {
+    "id": "mouse-g502",
+    "categoria": "accesorios",
+    "nombre": "Mouse Logitech G502",
+    "descripcion": "Sensor HERO 25K, RGB Lightsync",
+    "precio": 120,
+    "imagen": "img/MouseLogitechG502.jpg"
+  },
+  {
+    "id": "teclado-Redragon",
+    "categoria": "accesorios",
+    "nombre": "Teclado redragon kumara k552",
+    "descripcion": "Mecánico, RGB, Gamer",
+    "precio": 160,
+    "imagen": "img/productos/TecladoRDKumara.jpg"
+  }
+]

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const nombre = document.getElementById("nombre").value.trim();
@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmPassword = document.getElementById("repetirContrasena").value;
     const fechaNacimiento = document.getElementById("fechaNacimiento").value;
 
-    // Validar campos
+    // Validación básica
     if (!nombre || !apellido || !email || !password || !confirmPassword || !fechaNacimiento) {
-      alert("Por favor completa todos los campos.");
+      alert("Por favor, completa todos los campos.");
       return;
     }
 
@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Crear objeto usuario
     const usuario = {
       nombre,
       apellido,
@@ -38,15 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
       fechaNacimiento
     };
 
-
-    // Guardar en localStorage
-    // Guardar en localStorage
+    // Guardar usuario y sesión activa
     localStorage.setItem("usuario", JSON.stringify(usuario));
-    localStorage.setItem("usuarioActivo", JSON.stringify(usuario)); //Esto inicia sesión automática
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
 
-
-    // Confirmar y redirigir
-    alert("Registro exitoso. ¡Bienvenido/a " + nombre + "!");
+    alert(`Registro exitoso. ¡Bienvenido/a ${nombre}!`);
     window.location.href = "index.html";
   });
 });

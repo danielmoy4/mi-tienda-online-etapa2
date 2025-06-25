@@ -1,60 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Tienda Online</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <title>Bear Tech</title>
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <img src="img/logo.svg" alt="Logo de Mi Tienda Online" class="logo" />
-      <ul class="nav-links">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="producto.html">Productos</a></li>
-        <li><a href="login.html">Iniciar Sesión</a></li>
-        <li><a href="registro.html">Registrarse</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Aquí se inyectará el navbar desde navbar.js -->
+  <div id="navbar-container"></div>
 
   <main>
     <section class="hero">
-      <h1>Bienvenido a Mi Tienda Online</h1>
-      <p>Encuentra los mejores productos al mejor precio.</p>
+      <div class="hero-text">
+        <h1>Bienvenido a Bear Tech</h1>
+        <p>Encuentra los mejores productos al mejor precio.</p>
+      </div>
+      <div class="hero-image">
+        <img src="img/BearTech.png" alt="Banner Tienda">
+      </div>
     </section>
 
     <section class="productos">
-      <h2>Productos Destacados</h2>
-      <div class="card">
-        <img src="img/rx6600.jpg" alt="Producto 1" />
-        <h3>Producto 1</h3>
-        <p>$1000</p>
-        <button>Comprar</button>
+      <div class="carrusel">
+        <h2>Productos Destacados</h2>
+        <div class="carrusel-container">
+          <button class="carrusel-btn izquierda">&#10094;</button>
+          <div class="carrusel-items">
+            <!-- Aquí se insertarán las cards dinámicamente -->
+          </div>
+          <button class="carrusel-btn derecha">&#10095;</button>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Mi Tienda Online</p>
+    <p>&copy; 2025 Bear Tech</p>
   </footer>
-=======
-  <meta charset="UTF-8">
-  <title>Inicio - Mi Tienda Online</title>
-  <link rel="stylesheet" href="css/estilos.css">
-  <script src="js/navbar-data.js" defer></script>
-  <script src="js/navbar.js" defer></script>
-  <script src="js/cards.js" defer></script>
-</head>
-<body>
-  <main>
-    <h2>Bienvenido a Mi Tienda Online</h2>
-    <p>Encuentra los mejores productos al mejor precio.</p>
-    <div id="productos"></div>
-  </main>
-  <footer>© 2025 Mi Tienda Online</footer>
->>>>>>> fe5125a (Entrega etapa 3 finalizada - carrito por usuario y mejoras)
+
+  <!-- Scripts al final para mejor carga -->
+  <script src="js/navbar-data.js"></script>
+  <script src="js/navbar.js"></script>
+
+<style>
+  .carrusel {
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .carrusel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carrusel-items {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    width: auto; /* permite que crezca según el contenido */
+  }
+
+  .carrusel-items .card {
+    flex: 0 0 300px;
+    margin: 0 10px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .carrusel-btn {
+    background-color: #00a884;
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 0 10px;
+    z-index: 2;
+  }
+
+  .carrusel-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>
+
+  <script>
+    const cards = [
+      {
+        nombre: "Placa de video RX6600",
+        descripcion: "Gráfica potente para gaming 1080p",
+        precio: 1000,
+        imagen: "img/productos/rx6600.jpg"
+      },
+      {
+        nombre: "Monitor ASUS ROG",
+        descripcion: "Monitor gamer 27'' Full HD 144Hz",
+        precio: 1500,
+        imagen: "img/productos/MonitorAsusRog.jpg"
+      },
+      {
+        nombre: "Mouse Logitech G502",
+        descripcion: "Sensor HERO 25K, RGB Lightsync",
+        precio: 120,
+        imagen: "img/productos/MouseLogitechG502.jpg"
+      },
+      {
+        nombre: "Teclado redragon kumara k552",
+        descripcion: "Mecánico, RGB",
+        precio: 160,
+        imagen: "img/productos/TecladoRDKumara.jpg"
+      }
+    ];
+
+    const container = document.querySelector(".carrusel-items");
+    let current = 0;
+
+    function renderCarrusel() {
+      container.innerHTML = cards.map(producto => `
+        <div class="card">
+          <img src="${producto.imagen}" alt="${producto.nombre}" width="100%">
+          <h3>${producto.nombre}</h3>
+          <p>${producto.descripcion}</p>
+          <strong>$${producto.precio}</strong>
+        </div>
+      `).join('');
+    }
+
+    function mover(direccion) {
+      const total = cards.length;
+      const visible = 3;
+      const cardWidth = container.querySelector(".card").offsetWidth + 20; // ancho + margen
+
+      if (direccion === 'izquierda' && current > 0) current--;
+      if (direccion === 'derecha' && current < total - visible) current++;
+      container.style.transform = `translateX(-${current * cardWidth}px)`;
+    }
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCarrusel();
+      document.querySelector(".izquierda").addEventListener("click", () => mover('izquierda'));
+      document.querySelector(".derecha").addEventListener("click", () => mover('derecha'));
+    });
+  </script>
 </body>
 </html>

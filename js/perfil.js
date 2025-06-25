@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
   if (!usuario) {
-    contenedor.innerHTML = "<p>No has iniciado sesión. <a href='login.html'>Inicia sesión</a></p>";
+    contenedor.innerHTML = `
+      <p>No has iniciado sesión. <a href="login.html">Inicia sesión</a></p>
+    `;
     return;
   }
 

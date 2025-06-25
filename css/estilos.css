@@ -1,149 +1,134 @@
-<<<<<<< HEAD
-/* Paleta de colores */
 :root {
   --primario: #2c3e50;
   --secundario: #18bc9c;
   --fondo: #ecf0f1;
   --texto: #2c3e50;
 }
+
+/* Reset general */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: Arial, sans-serif;
-  background-color: var(--fondo);
-  color: var(--texto);
-  line-height: 1.6;
-}
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--primario);
-  padding: 1rem;
-}
-.logo { width: 120px; }
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-}
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-.hero {
-  text-align: center;
-  padding: 2rem;
-  background: linear-gradient(to right, var(--secundario), var(--primario));
-  color: white;
-}
-.productos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-}
-.card {
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 1rem;
-  width: 300px;
-  text-align: center;
-}
-.card img {
-  max-width: 100%;
-  height: auto;
-}
-.card button {
-  background-color: var(--secundario);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  margin-top: 0.5rem;
-}
-.formulario {
-  max-width: 400px;
-  margin: 2rem auto;
-  background-color: white;
-  padding: 2rem;
-  border-radius: 5px;
-}
-.formulario h2 { margin-bottom: 1rem; }
-.formulario label { display: block; margin-top: 1rem; }
-.formulario input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-}
-.formulario button {
-  margin-top: 1rem;
-  background-color: var(--secundario);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: var(--primario);
-  color: white;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-=======
-/* Reset general */
-* {
   box-sizing: border-box;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #e9eef3;
-  margin: 0;
-  padding: 0;
+  background-color: var(--fondo);
+  color: var(--texto);
+  line-height: 1.6;
 }
 
 /* Barra de navegación */
 header {
-  background-color:rgb(54, 68, 68);
+  background: linear-gradient(to right, var(--secundario), var(--primario));
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
 }
 
-header nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.logo-box {
   display: flex;
-  gap: 2rem;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
 }
 
-header nav ul li a {
+.logo-img {
+  height: 40px;
+}
+
+.logo-text {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.logo {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin-left: auto; /* Empuja los links a la derecha */
+}
+
+.nav-links li {
+  display: inline-block;
+}
+
+.nav-links li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
 }
 
-header nav ul li a:hover {
+.nav-links li a:hover {
   color: #d1f5ec;
 }
 
-/* Contenido general */
+.navbar {
+  background: linear-gradient(to right, var(--secundario), var(--primario));
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+/* Contenido principal */
 main {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 1rem;
   text-align: center;
 }
+
+/* Hero principal */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, var(--secundario), var(--primario));
+  color: white;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.hero-text {
+  flex: 1;
+  text-align: left;
+}
+
+.hero-text h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #e2e2e2;
+}
+
+.hero-image {
+  flex: 0 0 200px;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
 
 /* Cards de productos */
 .card-container {
@@ -160,10 +145,12 @@ main {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
 .card img {
@@ -200,31 +187,27 @@ main {
   background-color: #0056b3;
 }
 
-/* Login y formularios */
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem 1rem;
-}
-
-body.login-page {
+/* Login / Registro */
+.login-page,
+.registro-page {
   background-color: #a4cfcf;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
 }
 
-body.login-page main {
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  padding: 2rem 1rem;
+  min-height: calc(100vh - 100px); /* altura sin el navbar y footer */
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-.login-card {
+
+
+.login-card,
+.register-card {
   background: #518585;
   padding: 2rem;
   border-radius: 10px;
@@ -234,17 +217,20 @@ body.login-page main {
   text-align: center;
 }
 
-.login-card h2 {
+.login-card h2,
+.register-card h2 {
   margin-bottom: 0.5rem;
 }
 
-.login-card p {
+.login-card p,
+.register-card p {
   margin-bottom: 1.5rem;
-  color: #555;
+  color: #e2e2e2;
 }
 
 form {
   text-align: left;
+  width: 100%;
 }
 
 label {
@@ -276,22 +262,10 @@ label {
   color: #888;
 }
 
-.login-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-.login-options a {
-  text-decoration: none;
-  color: #007bff;
-}
-
 button[type="submit"],
 .google-btn,
-.github-btn {
+.github-btn,
+.register-card button {
   width: 100%;
   margin-top: 0.5rem;
   padding: 0.5rem;
@@ -304,12 +278,8 @@ button[type="submit"],
   transition: background-color 0.3s ease;
 }
 
-.github-btn:hover {
-  background-color: #d0d0d0;
-}
-
-.google-btn:hover {
-  background-color: #e0e0e0;
+button:hover {
+  background-color: #ddd;
 }
 
 .separator {
@@ -318,101 +288,7 @@ button[type="submit"],
   margin: 1.5rem 0;
 }
 
-.center {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #f2f2f2;
-  margin-top: 2rem;
-}
-
-/* Registro */
-body.registro-page {
-  background-color:#a4cfcf;
-;
-}
-
-.form-container {
-  max-width: 400px;
-  margin: 3rem auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.register-card {
-  background: #518585;
-  padding: 2rem;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.register-card h2 {
-  margin-bottom: 0.5rem;
-}
-
-.register-card p {
-  margin-bottom: 1.5rem;
-  color: #555;
-}
-
-.register-card form {
-  text-align: left;
-}
-
-.register-card label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.register-card .input-icon input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 0.95rem;
-}
-
-.register-card button {
-  width: 100%;
-  background-color: #000;
-  color: white;
-  border: none;
-  padding: 0.75rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.register-card .center {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-}
-
-button.social-button {
-  display: block;
-  width: 100%;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  background: #f0f0f0;
-  border: none;
-  cursor: pointer;
-}
-
-/* Pagina Perfil */
-
+/* Página perfil */
 .perfil-container {
   max-width: 600px;
   margin: 2rem auto;
@@ -427,8 +303,7 @@ button.social-button {
   font-size: 1rem;
 }
 
-/* Para los botones + y - */
-
+/* Carrito y compras */
 .cantidad-control {
   display: flex;
   justify-content: center;
@@ -448,8 +323,6 @@ button.social-button {
   text-align: center;
   font-weight: bold;
 }
-
-/* Lista de compras */
 
 .acciones-carrito {
   display: flex;
@@ -502,5 +375,145 @@ button.social-button {
   font-size: 1.2rem;
   font-weight: bold;
   text-align: left;
->>>>>>> fe5125a (Entrega etapa 3 finalizada - carrito por usuario y mejoras)
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f2f2f2;
+  margin-top: 2rem;
+}
+
+
+/* Sección de categorías con título */
+.categoria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  padding: 0 2rem;
+}
+
+main h3 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primario);
+  font-size: 1.4rem;
+}
+
+/* Ajuste visual para los inputs de cantidad y botones */
+.card .cantidad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.8rem 0;
+  gap: 0.5rem;
+}
+
+.card .cantidad button {
+  background-color: var(--secundario);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card .cantidad button:hover {
+  background-color: #139f85;
+}
+
+.card .cantidad input {
+  width: 50px;
+  text-align: center;
+  padding: 0.3rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-weight: bold;
+}
+
+main h3:not(:first-of-type) {
+  border-top: 2px solid #ccc;
+  padding-top: 2rem;
+}
+
+/* MODO OSCURO */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .login-card,
+body.dark-mode .register-card,
+body.dark-mode .perfil-container,
+body.dark-mode .card {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .navbar,
+body.dark-mode header {
+  background: linear-gradient(to right, #0f766e, #0f172a);
+}
+
+body.dark-mode .nav-links li a {
+  color: #ffffff;
+}
+
+body.dark-mode .nav-links li a:hover {
+  color: #00e0c6;
+}
+
+body.dark-mode footer {
+  background-color: #2e2e2e;
+  color: #aaa;
+}
+
+body.dark-mode .card button,
+body.dark-mode .btn-rojo,
+body.dark-mode .btn-verde {
+  background-color: #00a884;
+  color: white;
+}
+
+body.dark-mode .card button:hover,
+body.dark-mode .btn-rojo:hover,
+body.dark-mode .btn-verde:hover {
+  background-color: #00796b;
+}
+
+.btn-tema {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-tema:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ocultar flechas en input type="number" (Chrome, Safari, Edge) */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Compatibilidad moderna para ocultar flechas en input tipo number */
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield; /* Firefox */
+}
+
+h2, h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }

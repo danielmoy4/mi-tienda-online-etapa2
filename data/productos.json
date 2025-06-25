@@ -1,0 +1,51 @@
+[
+  {
+    "categoria": "placas",
+    "nombre": "Placa de video RX6600",
+    "descripcion": "Gráfica potente para gaming 1080p",
+    "precio": 1000,
+    "imagen": "img/productos/rx6600.jpg"
+  },
+  {
+    "categoria": "monitores",
+    "nombre": "Monitor ASUS ROG",
+    "descripcion": "Monitor gamer 27'' Full HD 144Hz",
+    "precio": 1500,
+    "imagen": "img/productos/MonitorAsusRog.jpg"
+  },
+  {
+    "categoria": "monitores",
+    "nombre": "Monitor LG 27\"",
+    "descripcion": "Pantalla IPS 2K para diseño y productividad",
+    "precio": 1300,
+    "imagen": "img/productos/MonitorLG27.jpg"
+  },
+  {
+    "categoria": "mouses",
+    "nombre": "Mouse Logitech G502",
+    "descripcion": "Mouse gamer con 11 botones programables",
+    "precio": 500,
+    "imagen": "img/productos/MouseLogitechG502.jpg"
+  },
+  {
+    "categoria": "mouses",
+    "nombre": "Mouse SteelSeries Aerox 9",
+    "descripcion": "Ultraligero y preciso para MMO",
+    "precio": 600,
+    "imagen": "img/productos/MouseSteelSeriesAerox9.jpg"
+  },
+  {
+    "categoria": "procesadores",
+    "nombre": "Procesador AMD Ryzen 3",
+    "descripcion": "Procesador quad-core para tareas básicas",
+    "precio": 800,
+    "imagen": "img/productos/ProcesadorAMDRyzen3.jpg"
+  },
+  {
+    "categoria": "teclados",
+    "nombre": "Teclado redragon kumara k552",
+    "descripcion": "Teclado RGB redragon gamer",
+    "precio": 800,
+    "imagen": "img/productos/TecladoRDKumara.jpg"
+  }
+]
