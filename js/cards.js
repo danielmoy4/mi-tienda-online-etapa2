@@ -1,41 +1,88 @@
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("productos");
-  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+  const inputBuscar = document.getElementById("buscador");
+  const selectCategoria = document.getElementById("filtro-categoria");
+  const formBusqueda = document.getElementById("form-busqueda");
 
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
   if (!usuarioActivo) {
     contenedor.innerHTML = "<p>Inicia sesión para ver los productos.</p>";
     return;
   }
 
+  let todosLosProductos = [];
+
   fetch("data/productos.json")
     .then((res) => res.json())
     .then((productos) => {
-      const categorias = ["placas", "monitores", "mouses", "procesadores"];
-
-      categorias.forEach((categoria) => {
-        const productosFiltrados = productos.filter(p => p.categoria === categoria);
-
-        if (productosFiltrados.length > 0) {
-          const tituloCategoria = document.createElement("h3");
-          tituloCategoria.textContent = nombreCategoria(categoria);
-          contenedor.appendChild(tituloCategoria);
-
-          const contenedorCategoria = document.createElement("div");
-          contenedorCategoria.classList.add("categoria-grid");
-
-          productosFiltrados.forEach((producto) => {
-            const card = crearCardProducto(producto);
-            contenedorCategoria.appendChild(card);
-          });
-
-          contenedor.appendChild(contenedorCategoria);
-        }
-      });
+      todosLosProductos = productos;
+      renderizarProductos(productos);
     })
     .catch((err) => {
       console.error("Error cargando productos:", err);
       contenedor.innerHTML = "<p>Error al cargar los productos.</p>";
     });
+
+  function renderizarProductos(lista) {
+    contenedor.innerHTML = "<h2>Productos</h2>";
+
+    const categorias = ["placas", "monitores", "mouses", "procesadores"];
+    let productosMostrados = 0;
+
+    categorias.forEach((categoria) => {
+      const productosFiltrados = lista.filter(p => p.categoria === categoria);
+
+      if (productosFiltrados.length > 0) {
+        const tituloCategoria = document.createElement("h3");
+        tituloCategoria.textContent = nombreCategoria(categoria);
+        contenedor.appendChild(tituloCategoria);
+
+        const contenedorCategoria = document.createElement("div");
+        contenedorCategoria.classList.add("categoria-grid");
+
+        productosFiltrados.forEach((producto) => {
+          const card = crearCardProducto(producto);
+          contenedorCategoria.appendChild(card);
+          productosMostrados++;
+        });
+
+        contenedor.appendChild(contenedorCategoria);
+        contenedor.appendChild(document.createElement("hr"));
+      }
+    });
+
+    if (productosMostrados === 0) {
+      const mensaje = document.createElement("p");
+      mensaje.textContent = "No se encontraron productos que coincidan con tu búsqueda.";
+      mensaje.style.textAlign = "center";
+      mensaje.style.fontSize = "1.2rem";
+      mensaje.style.padding = "1rem";
+      contenedor.appendChild(mensaje);
+    }
+  }
+
+  function filtrarProductos() {
+    const texto = inputBuscar?.value.toLowerCase() || "";
+    const categoria = selectCategoria?.value || "todos";
+
+    const filtrados = todosLosProductos.filter(prod => {
+      const coincideNombre = prod.nombre.toLowerCase().includes(texto);
+      const coincideCategoria = categoria === "todos" || prod.categoria === categoria;
+      return coincideNombre && coincideCategoria;
+    });
+
+    renderizarProductos(filtrados);
+  }
+
+  // Eventos
+  if (inputBuscar) inputBuscar.addEventListener("input", filtrarProductos);
+  if (selectCategoria) selectCategoria.addEventListener("change", filtrarProductos);
+  if (formBusqueda) {
+    formBusqueda.addEventListener("submit", (e) => {
+      e.preventDefault();
+      filtrarProductos();
+    });
+  }
 });
 
 function nombreCategoria(categoria) {

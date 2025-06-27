@@ -517,3 +517,42 @@ h2, h3 {
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
+
+/* Filtros */
+
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+.filtros input, .filtros select {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, #00a884, #007e6e);
+  padding: 0.8rem 1.5rem;
+}
+
+.navbar-busqueda {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 2rem;
+}
+
+.navbar-busqueda input,
+.navbar-busqueda select {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: none;
+}
+
+

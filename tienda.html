@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tienda - Bear Tech</title>
-  <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
   <div id="navbar-container"></div>
 
   <main>
-    <h2>Productos</h2>
-    <div id="productos" class="productos"></div>
+    <div id="productos"></div>
   </main>
 
   <footer>
     <p>&copy; 2025 Bear Tech</p>
   </footer>
 
-  <script src="js/navbar-data.js" defer></script>
-  <script src="js/navbar.js" defer></script>
-  <script src="js/cards.js" defer></script>
+  <script src="js/navbar-data.js"></script>
+  <script>
+    fetch("js/navbar.js")
+      .then(res => res.text())
+      .then(code => {
+        const script = document.createElement("script");
+        script.innerHTML = code;
+        document.body.appendChild(script);
+
+        // Una vez que navbar se carga, cargamos cards.js
+        const cardsScript = document.createElement("script");
+        cardsScript.src = "js/cards.js";
+        document.body.appendChild(cardsScript);
+      });
+  </script>
 </body>
 </html>
